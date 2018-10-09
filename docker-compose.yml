@@ -6,7 +6,7 @@ services:
       context: ./certbot
     container_name: certbot
     ports:
-    - "80:80"
+    - "80:5000"
     - "443:443"
     #command:
     #- /sbin/init

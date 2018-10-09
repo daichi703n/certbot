@@ -12,13 +12,17 @@ RUN yum install -y \
   nginx certbot certbot-apache
 RUN yum clean all
 
-EXPOSE 80 443
+#EXPOSE 80 443
 
-CMD bash -c "\
-  nginx && \
-  certbot certonly \
+ENV PORT 5000
+
+#CMD echo "Hello world"
+CMD certbot certonly \
+  --work-dir /tmp \
+  --logs-dir /tmp/logs \
   --agree-tos \
-  --webroot \
-  --server https://$SERVER \
+  --non-interactive \
+  --standalone \
+  --http-01-port $PORT \
   -m $EMAIL \
-  -d $DOMAINS"
+  -d $SERVER
